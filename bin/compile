@@ -10,7 +10,7 @@ BP_DIR=$(cd $(dirname $0)/..; pwd) # absolute path
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
-export PROFILE_PATH=$BUILD_DIR/.profile.d
+export PROFILE_PATH=$BUILD_DIR/.profile.d/000_bp.sh
 export EXPORT_PATH=$BP_DIR/export
 export MULE_HOME=$1/.mule
 
@@ -28,7 +28,7 @@ mv ${BUILD_DIR}/*domain*.jar $MULE_HOME/domains/
 mv ${BUILD_DIR}/*.jar $MULE_HOME/apps/
 
 mkdir -p $BUILD_DIR/.profile.d
-cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
+cat <<EOF >$BUILD_DIR/.profile.d/000_mule.sh
 export MULE_HOME="\$HOME/.mule"
 export PATH="\$MULE_HOME/bin:\$PATH"
 EOF
