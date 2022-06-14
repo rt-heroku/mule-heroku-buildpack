@@ -2,6 +2,23 @@
 
 export DEFAULT_MULE_VERSION="4.4.0"
 
+function error() {
+  echo " !     $*" >&2
+  exit 1
+}
+
+function topic() {
+  echo "-----> $*"
+}
+
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
+
 install_mule() {
   local installDir=$1
   local buildDir=$2
