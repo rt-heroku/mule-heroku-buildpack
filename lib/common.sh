@@ -29,8 +29,10 @@ download_mule() {
   local installDir=$2
   local muleHome=$3
   rm -rf $muleHome
+
+echo "muleHome ... $muleHome"
+
   curl --fail --retry 3 --retry-connrefused --connect-timeout 5 --silent --max-time 60 --location "${muleUrl}" | tar xzm -C $installDir
-  chmod +x $muleHome/bin/mvn
 }
 
 is_supported_mule_version() {

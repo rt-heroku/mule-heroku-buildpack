@@ -21,8 +21,11 @@ export_env $ENV_DIR "." "JAVA_OPTS|JAVA_TOOL_OPTIONS"
 
 set_env "MULE_HOME" "${BUILD_DIR}/.mule"
 
+topic "Installing JDK"
 install_jdk "${BUILD_DIR}" "${CACHE_DIR}"
-install_mule "${BUILD_DIR}" "${CACHE_DIR}"
+
+topic "Installing Mule runtime ... "
+install_mule "${MULE_HOME}" "${CACHE_DIR}"
 
 mv ${BUILD_DIR}/*domain*.jar $MULE_HOME/domains/
 mv ${BUILD_DIR}/*.jar $MULE_HOME/apps/
