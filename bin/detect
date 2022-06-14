@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
-if ls $1/*.jar 1> /dev/null 2>&1;; then
+if ls $1/*.jar 1> /dev/null 2>&1; then
   echo "Jar files found"
   exit 0
 else
