@@ -20,9 +20,12 @@ function indent() {
 }
 
 install_mule() {
-  local installDir=$2
-  local buildDir=$1
+  local installDir=$1
+  local buildDir=$2
   muleHome=$installDir/.mule
+
+  if [ ! -d "$muleHome" ]
+    mkdir -p $muleHome
 
   definedMuleVersion=$(detect_mule_version $buildDir)
 
