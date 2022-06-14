@@ -27,8 +27,19 @@ install_jdk "${BUILD_DIR}" "${CACHE_DIR}"
 topic "Installing Mule runtime ... "
 install_mule "${BUILD_DIR}" "${CACHE_DIR}" "${MULE_HOME}"
 
-mv ${BUILD_DIR}/*domain*.jar $MULE_HOME/domains/
-mv ${BUILD_DIR}/*.jar $MULE_HOME/apps/
+
+if ls ${BUILD_DIR}/*.jar 1> /dev/null 2>&1; then
+	topic "Domain Jar files found, moving them to MULE_HOME/domains"
+	mv ${BUILD_DIR}/*domain*.jar $MULE_HOME/domains/
+fi
+
+if ls ${BUILD_DIR}/*.jar 1> /dev/null 2>&1; then
+	topic "Installing mule flows in runtime ..."
+	mv ${BUILD_DIR}/*.jar $MULE_HOME/apps/
+else
+	topic "Could not find any 'Api files'! Please ensure it exists and is checked into Git."
+	exit 1
+fi
 
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_mule.sh
