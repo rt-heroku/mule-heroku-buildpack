@@ -26,11 +26,12 @@ install_mule() {
 
   definedMuleVersion=$(detect_mule_version $buildDir)
 
-  muleVersion=${definedMuleVersion:-$DEFAULT_MAVEN_VERSION}
+  muleVersion=${definedMuleVersion:-$DEFAULT_MULE_VERSION}
   mcount "mvn.version.${muleVersion}"
 
   status_pending "Installing Mule ${muleVersion}"
   local muleUrl="https://s3.amazonaws.com/new-mule-artifacts/mule-ee-distribution-standalone-${muleVersion}.tar.gz"
+                 https://s3.amazonaws.com/new-mule-artifacts/mule-ee-distribution-standalone-4.4.0.tar.gz
   if is_supported_mule_version "${muleVersion}" "${muleUrl}"; then
     download_mule "${muleUrl}" "${buildDir}" "${muleHome}"
     mv $buildDir/mule-enterprise-standalone-${muleVersion}/* ${muleHome}/.
