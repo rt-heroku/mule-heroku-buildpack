@@ -13,9 +13,10 @@ install_mule() {
   mcount "mvn.version.${muleVersion}"
 
   status_pending "Installing Mule ${muleVersion}"
-  local muleUrl="https://s3.amazonaws.com/new-mule-artifacts/mule-ee-distribution-${muleVersion}.tar.gz"
+  local muleUrl="https://s3.amazonaws.com/new-mule-artifacts/mule-ee-distribution-standalone-${muleVersion}.tar.gz"
   if is_supported_mule_version "${muleVersion}" "${muleUrl}"; then
-    download_mule "${muleUrl}" "${installDir}" "${muleHome}"
+    download_mule "${muleUrl}" "${buildDir}" "${muleHome}"
+    mv $buildDir/mule-enterprise-standalone-${muleVersion}/* ${muleHome}/.
     status_done
   else
     error_return "Error, you have defined an unsupported Mule version in the system.properties file.
@@ -33,6 +34,7 @@ download_mule() {
 echo "muleHome ... $muleHome"
 
   curl --fail --retry 3 --retry-connrefused --connect-timeout 5 --silent --max-time 60 --location "${muleUrl}" | tar xzm -C $installDir
+
 }
 
 is_supported_mule_version() {
