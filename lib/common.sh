@@ -24,10 +24,16 @@ install_mule() {
   local buildDir=$2
   muleHome=$installDir/.mule
 
-  if [ ! -d "$muleHome" ]; then
-    mkdir -p $muleHome
+  if [  -d "${muleHome}" ]; then
+    topic "Deleting previous mule installations"
+    rm -rf ${muleHome}
   fi
-  
+
+  if [ ! -d "${muleHome}" ]; then
+    topic "Creating mule installations folder in ${muleHome}"
+    mkdir -p ${muleHome}
+  fi
+
   definedMuleVersion=$(detect_mule_version $buildDir)
 
   muleVersion=${definedMuleVersion:-$DEFAULT_MULE_VERSION}
@@ -38,6 +44,7 @@ install_mule() {
   
   if is_supported_mule_version "${muleVersion}" "${muleUrl}"; then
     download_mule "${muleUrl}" "${buildDir}" "${muleHome}"
+    topic "moving $buildDir/mule-enterprise-standalone-${muleVersion}/* ${muleHome}/."
     mv $buildDir/mule-enterprise-standalone-${muleVersion}/* ${muleHome}/.
     status_done
   else
@@ -51,9 +58,8 @@ download_mule() {
   local muleUrl=$1
   local installDir=$2
   local muleHome=$3
-  rm -rf $muleHome
 
-echo "muleHome ... $muleHome"
+  topic "Installing mule in folder ... $installDir"
 
   curl --fail --retry 3 --retry-connrefused --connect-timeout 5 --silent --max-time 60 --location "${muleUrl}" | tar xzm -C $installDir
 
