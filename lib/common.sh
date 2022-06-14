@@ -24,9 +24,10 @@ install_mule() {
   local buildDir=$2
   muleHome=$installDir/.mule
 
-  if [ ! -d "$muleHome" ]
+  if [ ! -d "$muleHome" ]; then
     mkdir -p $muleHome
-
+  fi
+  
   definedMuleVersion=$(detect_mule_version $buildDir)
 
   muleVersion=${definedMuleVersion:-$DEFAULT_MULE_VERSION}
