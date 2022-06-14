@@ -37,3 +37,6 @@ export PATH="\$MULE_HOME/bin:\$PATH"
 EOF
 
 chmod +x $BUILD_DIR/.profile.d/000_mule.sh
+
+topic "Creating default domain binding the heroku port...."
+cp $BP_DIR/lib/heroku-domain.jar $MULE_HOME/domains
