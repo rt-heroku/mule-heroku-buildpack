@@ -19,7 +19,7 @@ source $BP_DIR/lib/buildpack-stdlib-v7.sh
 
 export_env $ENV_DIR "." "JAVA_OPTS|JAVA_TOOL_OPTIONS"
 
-set_env "MULE_HOME" "${BUILD_DIR}/.mule"
+#### set_env "MULE_HOME" "${BUILD_DIR}/.mule"
 
 topic "Installing JDK"
 install_jdk "${BUILD_DIR}" "${CACHE_DIR}"
