@@ -36,4 +36,4 @@ export MULE_HOME="\$HOME/.mule"
 export PATH="\$MULE_HOME/bin:\$PATH"
 EOF
 
-chmod +x $BUILD_DIR/.profile.d/000_apt.sh
+chmod +x $BUILD_DIR/.profile.d/000_mule.sh
