@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
+# fail fast
+set -e
+
+
+BPLOG_PREFIX="buildpack.mule"
+
+BP_DIR=$(cd $(dirname $0)/..; pwd) # absolute path
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+MULE_HOME=$1/.mule
+
+source $BP_DIR/lib/common.sh
+source $BP_DIR/lib/buildpack-stdlib-v7.sh
+
+export_env $ENV_DIR "." "JAVA_OPTS|JAVA_TOOL_OPTIONS"
+
+set_env "MULE_HOME" "${BUILD_DIR}/.mule"
+
+install_jdk "${BUILD_DIR}" "${CACHE_DIR}"
+install_mule "${BUILD_DIR}" "${CACHE_DIR}"
+
+mv ${BUILD_DIR}/*domain*.jar $MULE_HOME/domains/
+mv ${BUILD_DIR}/*.jar $MULE_HOME/apps/
+
+mkdir -p $BUILD_DIR/.profile.d
+cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
+export MULE_HOME="\$HOME/.mule"
+export PATH="\$MULE_HOME/bin:\$PATH"
+EOF
+
+chmod +x $BUILD_DIR/.profile.d/000_apt.sh

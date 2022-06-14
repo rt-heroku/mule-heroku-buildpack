@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# bin/release <build-dir>
+
+BP_DIR=$(cd $(dirname $0)/..; pwd) # absolute path
+BUILD_DIR=$1
+
+source $BP_DIR/lib/frameworks.sh
+
+echo "---"
+
+if [ ! -f $BUILD_DIR/Procfile ] ; then
+  cd $BUILD_DIR
+      echo "default_process_types:"
+      echo "  web: $MULE_HOME/bin/mule -M-DPORT=\$PORT -M-Dmule.agent.enabled=true"
+    break;
+  done
+fi
