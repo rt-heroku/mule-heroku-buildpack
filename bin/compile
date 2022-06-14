@@ -28,7 +28,7 @@ topic "Installing Mule runtime ... "
 install_mule "${BUILD_DIR}" "${CACHE_DIR}" "${MULE_HOME}"
 
 
-if ls ${BUILD_DIR}/*.jar 1> /dev/null 2>&1; then
+if ls ${BUILD_DIR}/*domain*.jar 1> /dev/null 2>&1; then
 	topic "Domain Jar files found, moving them to MULE_HOME/domains"
 	mv ${BUILD_DIR}/*domain*.jar $MULE_HOME/domains/
 fi
