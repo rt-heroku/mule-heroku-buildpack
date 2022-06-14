@@ -4,14 +4,15 @@
 # fail fast
 set -e
 
-
 BPLOG_PREFIX="buildpack.mule"
 
 BP_DIR=$(cd $(dirname $0)/..; pwd) # absolute path
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
-MULE_HOME=$1/.mule
+export PROFILE_PATH=$BUILD_DIR/.profile.d
+export EXPORT_PATH=$BP_DIR/export
+export MULE_HOME=$1/.mule
 
 source $BP_DIR/lib/common.sh
 source $BP_DIR/lib/buildpack-stdlib-v7.sh
