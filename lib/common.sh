@@ -20,8 +20,8 @@ function indent() {
 }
 
 install_mule() {
-  local installDir=$1
-  local buildDir=$2
+  local installDir=$2
+  local buildDir=$1
   muleHome=$installDir/.mule
 
   definedMuleVersion=$(detect_mule_version $buildDir)
