@@ -9,7 +9,7 @@ if [ ! -f $BUILD_DIR/Procfile ] ; then
 cat << EOF
 ---
 default_process_types:
-  web: $MULE_HOME/bin/mule -M-DPORT=\$PORT -M-Dmule.agent.enabled=true
+  web: /apps/.mule/bin/mule -M-DPORT=\$PORT -M-Dmule.agent.enabled=true
 EOF
 
 fi
