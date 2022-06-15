@@ -4,7 +4,9 @@
 BP_DIR=$(cd $(dirname $0)/..; pwd) # absolute path
 BUILD_DIR=$1
 
-if [ ! -f $BUILD_DIR/Procfile ] ; then
+#[ ! -f $BUILD_DIR/Procfile ] || 
+
+if [ -s $BUILD_DIR/Procfile ] ; then
 
 cat << EOF
 ---

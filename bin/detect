@@ -3,8 +3,9 @@
 
 
 if ls $1/target/*.jar 1> /dev/null 2>&1; then
-  echo "Jar files found in target folder"
+  echo "Jar files found in target folder ... moving them .... "
   mv $1/target/*.jar $1/.
+  rm -rf $1/target
   exit 0
 fi
 
