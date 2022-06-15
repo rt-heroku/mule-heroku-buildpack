@@ -15,8 +15,18 @@ It will also generate the necessary Profile to run, but you can create your own 
 ## Setup
 
 ```
+export $MULE_PROJECT=$HOME/projects/workspace/mule
+export $HEROKU_APP_FOLDER=$HOME/projects/heroku_app
+
+# Change to mulesoft project
+cd $MULE_PROJECT
+
 # Compile your mulesoft project
 mvn clean package
+
+# Copy the mulesoft jar file to your heroku app folder
+cd $HEROKU_APP_FOLDER
+cp $MULE_PROJECT/target/*.jar $HEROKU_APP_FOLDER/.
 
 # Create Heroku app
 heroku create "app_name"
