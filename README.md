@@ -1,6 +1,6 @@
 # Deploy a Mule App to Heroku Dynos
 
-This projects deploys a Mule 4.4.0 (default) Runtime to a Heroku Dyno and handles the registration and de-registration of the Mule Runtime with Anypoint Runtime Manager. The registration with ARM is handled through the platform REST APIs and scripts.
+This projects deploys a Mule 4.4.0 (default) Runtime to a Heroku Dyno .
 
 The buildpack includes a pre-built Domain project that has an HTTP Listener that leverages the `PORT` that is assigned when the Dyno is deployed. 
 It will also generate the necessary Profile to run, but you can create your own and deploy it, just add it to the folder and commit it to git.
@@ -32,7 +32,7 @@ cp $MULE_PROJECT/target/*.jar $HEROKU_APP_FOLDER/.
 heroku create "app_name"
 
 # Add buildpack to app
-heroku buildpacks:set https://github.com/rt-heroku/mule-heroku-buildpack
+heroku buildpacks:set rt/mule
 ```
 
 ### Config
