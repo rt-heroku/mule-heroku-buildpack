@@ -37,7 +37,7 @@ install_mule() {
   definedMuleVersion=$(detect_mule_version $buildDir)
 
   muleVersion=${definedMuleVersion:-$DEFAULT_MULE_VERSION}
-  mcount "mvn.version.${muleVersion}"
+  mcount "mule.version.${muleVersion}"
 
   status_pending "Installing Mule ${muleVersion}"
   local muleUrl="https://s3.amazonaws.com/new-mule-artifacts/mule-ee-distribution-standalone-${muleVersion}.tar.gz"
@@ -58,8 +58,6 @@ download_mule() {
   local muleUrl=$1
   local installDir=$2
   local muleHome=$3
-
-  topic "Installing mule in folder ... $installDir"
 
   curl --fail --retry 3 --retry-connrefused --connect-timeout 5 --silent --max-time 60 --location "${muleUrl}" | tar xzm -C $installDir
 
