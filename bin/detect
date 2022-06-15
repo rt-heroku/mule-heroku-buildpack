@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
+
+if ls $1/target/*.jar 1> /dev/null 2>&1; then
+  echo "Jar files found in target folder"
+  mv $1/target/*.jar $1/.
+  exit 0
+fi
+
 if ls $1/*.jar 1> /dev/null 2>&1; then
   echo "Jar files found"
   exit 0
