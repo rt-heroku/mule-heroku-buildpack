@@ -3,14 +3,14 @@
 
 
 if ls $1/target/*.jar 1> /dev/null 2>&1; then
-  echo "Jar files found in target folder ... moving them .... "
+  echo "Mulesoft"
   mv $1/target/*.jar $1/.
   rm -rf $1/target
   exit 0
 fi
 
 if ls $1/*.jar 1> /dev/null 2>&1; then
-  echo "Jar files found"
+  echo "Mulesoft"
   exit 0
 else
   echo "Could not find any 'Api & Domain files'! Please ensure it exists and is checked into Git." >&2
