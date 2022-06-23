@@ -1,8 +1,10 @@
+This buildpack is also registered in Heroku and you can add it with the key `rt/mule`
+
 # Deploy a Mule App to Heroku Dynos
 
-This projects deploys a Mule 4.4.0 (default) Runtime to a Heroku Dyno .
+This projects deploys a Mule 4.4.0 (default) Runtime to a Heroku Dyno, but you can set any version.
 
-The buildpack includes a pre-built Domain project that has an HTTP Listener that leverages the `PORT` that is assigned when the Dyno is deployed. 
+The buildpack includes a pre-built Domain project that has an HTTP Listener that leverages the `PORT` that is assigned when the Dyno is deployed. You can [download this Domain project](https://github.com/rt-heroku/mule-heroku-buildpack/blob/main/lib/heroku-domain.jar) from the lib folder and add import it into your Anypoint Studio.
 It will also generate the necessary Profile to run, but you can create your own and deploy it, just add it to the folder and commit it to git.
 
 ## Requirements
@@ -48,14 +50,18 @@ Set the following config vars. These are needed for the scripts to understand wh
 
 Additionally you can also go into the `Settings` tab of your app in Heroku and enter those values in the `Config Vars` section.
 
-## Deploy Runtime to Heroku
+## Deploy Mule Apps and Runtime to Heroku
+
+This buildpack only needs the deployment or `jar` files from your Mule Project. You can deploy as many Mule apps as you want so simply put them in the root folder of your HEROKU_APP and push them to Heroku with the CLI.
+
 ```
     git add .
     git commit -m "Heroku deployment"
-    git push heroku master
+    git push heroku main
 ```
 
-The Java Heap Size for the Mule Runtime is set to 512MB by default in the `conf\wrapper.conf` file. The first deployment may fail sporadically, but you can scale up to an instance with more than 1GB of RAM. You can do so with the following command:
+The Java Heap Size for the Mule Runtime is set to 512MB by default in the `conf\wrapper.conf` file. The first deployment may fail sporadically, but you can scale up to an instance with more than 1GB of RAM. It is recommended to run the runtime in at least a Performance-M dyno so you don't encounter any problems. You can find more information in [Dyno Types] (https://devcenter.heroku.com/articles/dyno-types)
+You can do so with the following command:
 
 ```
 heroku ps:scale web=1:performance-m
@@ -89,7 +95,12 @@ $ HEROKU_API_KEY="xxx-xxx-xxxx" mvn clean package heroku:deploy
 
 ### Deploying a Standalone Application
 
-Add the following to your `pom.xml`, but replace the `<web>` element with the command used to run your application.
+Add the following to your `pom.xml`, and inside the `<web>` element add the variables you want to add `ex. -M-Denv=dev`.
+For more information you can visit the official documentation.
+
+1. [Deploying Java applications with the Heroku Maven Plugin] (https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin)
+1. [Deploying to multiple applications (ex. dev, test, prod)] (https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin#deploying-to-multiple-applications)
+
 
 ```xml
 <build>
@@ -108,7 +119,7 @@ Add the following to your `pom.xml`, but replace the `<web>` element with the co
 			  <include>target/*.jar</include>
 			</includes>
 	        <processTypes>
-	          <web>$MULE_HOME/bin/mule -M-DPORT=$PORT -M-Dmule.agent.enabled=true $JAVA_OPTS</web>
+	          <web>$MULE_HOME/bin/mule -M-DPORT=$PORT -M-Denv=heroku -M-Dmule.agent.enabled=true $JAVA_OPTS</web>
 	        </processTypes>
 		</configuration>
 	</plugin>
