@@ -98,8 +98,8 @@ $ HEROKU_API_KEY="xxx-xxx-xxxx" mvn clean package heroku:deploy
 Add the following to your `pom.xml`, and inside the `<web>` element add the variables you want to add `ex. -M-Denv=dev`.
 For more information you can visit the official documentation.
 
-1. [Deploying Java applications with the Heroku Maven Plugin] (https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin)
-1. [Deploying to multiple applications (ex. dev, test, prod)] (https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin#deploying-to-multiple-applications)
+1. [Deploying Java applications with the Heroku Maven Plugin](https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin)
+1. [Deploying to multiple applications (ex. dev, test, prod)](https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin#deploying-to-multiple-applications)
 
 
 ```xml
