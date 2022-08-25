@@ -51,3 +51,6 @@ chmod +x $BUILD_DIR/.profile.d/000_mule.sh
 
 topic "Creating default domain binding the heroku port...."
 cp $BP_DIR/lib/heroku-domain.jar $MULE_HOME/domains
+
+rm $MULE_HOME/conf/log4j2.xml
+cp $BP_DIR/lib/log4j.properties $MULE_HOME/conf
